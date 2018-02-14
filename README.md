@@ -86,4 +86,4 @@ We also need to revert any self modifications we do transforming either the `adc
 
 That pretty much sums it up, and the code itself will probably explain more.
 
-
+![picture alt](https://raw.githubusercontent.com/HexTank/ScrollerC64/master/scroller.gif "Weeeeeeeeeee")
