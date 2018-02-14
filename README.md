@@ -73,14 +73,14 @@ There is a special case for all the above, and that's doing the first row when w
 ```
 adc #2
 adc #2
-sta $4000,x
+sta $4000
 adc #2
 adc #2
-sta $4001,x
+sta $4001
 iny
 ```
 
-and change the first and third `adc` instruction.
+and change the first and third `adc` instruction, also note we don't use the `,x` offset here.
 
 We also need to revert any self modifications we do transforming either the `adc #4` or `and #15` instructions to `lda (xx),y` back to their former glory ready for the next frame.
 
