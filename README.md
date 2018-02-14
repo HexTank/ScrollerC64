@@ -59,12 +59,12 @@ sta $4
 ldy #0
 lda ($3),y	// Preload a in case we're offset 8 pixels on the X axis
 adc #2
-ldy ??
+ldy map_x_adjust
 ```
 
 The LSB and MSB values can be changed via self modifying code upon map initialisation.  The last four instructions are also needed before we call the character fill routine as A needs to be in a ready state for the first two `adc #2` instructions.
 
-The `ldy ??` instruction needs to be either #0 or #40 depending if we are 0 or 8 bound on the Y axis, we can store this in another zero page byte. 
+`ldy map_x_adjust` is used to offset the first tile in the map data per row as we change halfway through a 2x2 block when our scroll on the X axis is 8 bound, this is just a zero page variable that is 0 when we're less than 8 pixels on the X axis and 1 when we're less than 16.
 
 The good thing about all this, is that we can use the exact same code for the colours by replacing `adc #2` with `and #15` and putting the colour map data pointer at zero page address $f and $10.  This does mean we do needless operations for most part, but the cycle count should be pretty much identical, and as you would generally do the colour on a subsequent frame, it doesn't really matter.
 
